@@ -20,6 +20,7 @@ namespace RevitFormulasValidator.Models
         {
             FunctionType = functionType;
             ChildFunctions = new List<RevitFunctionModel>();
+            Arguments = new List<string>();
         }
 
         public void AddArgument(string argument)

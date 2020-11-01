@@ -167,20 +167,24 @@ namespace RevitFormulasValidator
                     RevitFunctionModel revitFunction = null;
                     foreach (RevitEnums.FunctionType revitEnum in Enum.GetValues(typeof(RevitEnums.FunctionType)))
                     {
-                        var startIndex = i - revitEnum.GetDescription().Length;
+                        var descLenght = revitEnum.GetDescription().Length;
+                        var startIndex = i - descLenght;
                         if (startIndex < 0)
                         {
                             startIndex = 0;
                         }
-                        string function = formula.Substring(startIndex, revitEnum.GetDescription().Length);
-                        bool isContaining = Regex.IsMatch(function, $@"\b{revitEnum.GetDescription()}\b", RegexOptions.IgnoreCase);
-                        if (isContaining)
+                        if(descLenght < formula.Length)
                         {
-                            revitFunction = new RevitFunctionModel(revitEnum)
+                            string function = formula.Substring(startIndex, descLenght);
+                            bool isContaining = Regex.IsMatch(function, $@"\b{revitEnum.GetDescription()}\b", RegexOptions.IgnoreCase);
+                            if (isContaining)
                             {
-                                StartPos = i
-                            };
-                            functionsList.Add(revitFunction);
+                                revitFunction = new RevitFunctionModel(revitEnum)
+                                {
+                                    StartPos = i
+                                };
+                                functionsList.Add(revitFunction);
+                            }
                         }
                     }
                     if (revitFunction == null)

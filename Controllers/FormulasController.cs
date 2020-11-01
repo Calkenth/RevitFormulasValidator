@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RevitFormulasValidator.ViewModels;
@@ -27,7 +28,7 @@ namespace RevitFormulasValidator.Controllers
             {
                 return "formula is empty";
             }
-            formula = formula.Trim();
+            formula = formula.Replace(" ","");
             
             try
             {
