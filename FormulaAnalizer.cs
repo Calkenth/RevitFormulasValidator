@@ -54,7 +54,6 @@ namespace RevitFormulasValidator
 
                     if (counter == 0)
                     {
-                        // function end position found !
                         CheckCommasInFunction(function, formula, i);
                         break;
                     }
