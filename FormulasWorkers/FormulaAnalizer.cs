@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace RevitFormulasValidator
+namespace RevitFormulasValidator.FormulasWorkers
 {
     public class FormulaAnalizer
     {
@@ -98,12 +98,12 @@ namespace RevitFormulasValidator
                         }
                     }
 
-                    if(correctNumOfCommas < numOfCommas)
+                    if (correctNumOfCommas < numOfCommas)
                     {
                         throw new Exception($"Unnecessary comma in formula at index {i} - possibly bracket around this index.");
                     }
                 }
-                if(correctNumOfCommas > numOfCommas)
+                if (correctNumOfCommas > numOfCommas)
                 {
                     throw new Exception(
                         $"Missing commas in {function.FunctionTypeName} starting at index {function.StartPos}.\nFunction should have {correctNumOfCommas} commas but contains only {numOfCommas}.");
@@ -160,7 +160,7 @@ namespace RevitFormulasValidator
             var functionsList = new List<RevitFunctionModel>();
             for (int i = 0; i < formula.Length; i++)
             {
-                char character = (char)formula[i];
+                char character = formula[i];
                 if (character.Equals(openingBracket))
                 {
                     RevitFunctionModel revitFunction = null;
@@ -172,7 +172,7 @@ namespace RevitFormulasValidator
                         {
                             startIndex = 0;
                         }
-                        if(descLenght < formula.Length)
+                        if (descLenght < formula.Length)
                         {
                             string function = formula.Substring(startIndex, descLenght);
                             bool isContaining = Regex.IsMatch(function, $@"\b{revitEnum.GetDescription()}\b", RegexOptions.IgnoreCase);
@@ -201,7 +201,7 @@ namespace RevitFormulasValidator
             List<RevitFunctionsPositionModel> bracketsPosList = new List<RevitFunctionsPositionModel>();
             for (int i = 0; i < formula.Length; i++)
             {
-                char character = (char)formula[i];
+                char character = formula[i];
                 if (character.Equals(openingBracket))
                 {
                     bracketsPosList.Add(new RevitFunctionsPositionModel()

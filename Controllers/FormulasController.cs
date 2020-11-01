@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using RevitFormulasValidator.FormulasWorkers;
+using RevitFormulasValidator.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using RevitFormulasValidator.ViewModels;
 
 namespace RevitFormulasValidator.Controllers
 {
@@ -28,8 +28,8 @@ namespace RevitFormulasValidator.Controllers
             {
                 return "formula is empty";
             }
-            formula = formula.Replace(" ","");
-            
+            formula = formula.Replace(" ", "");
+
             try
             {
                 var revitFunctions = formulaAnalizer.Analize(formula);
@@ -41,7 +41,7 @@ namespace RevitFormulasValidator.Controllers
 
                 return JsonConvert.SerializeObject(revitFunctions);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return $"Exception: {ex}";
             }
@@ -50,7 +50,7 @@ namespace RevitFormulasValidator.Controllers
         [HttpPost("GenerateFormula")]
         public string GenerateFormula([FromBody] List<RevitFunctionViewModel> revitFunctions)
         {
-            if(revitFunctions == null || !revitFunctions.Any())
+            if (revitFunctions == null || !revitFunctions.Any())
             {
                 throw new Exception("Request body is empty");
             }

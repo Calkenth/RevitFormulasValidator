@@ -1,9 +1,5 @@
 ﻿using RevitFormulasValidator.Enums;
-using RevitFormulasValidator.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RevitFormulasValidator.Data
 {

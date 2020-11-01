@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RevitFormulasValidator
+namespace RevitFormulasValidator.FormulasWorkers
 {
     public class FormulaGenerator
     {
@@ -15,7 +15,7 @@ namespace RevitFormulasValidator
             {
                 if (revitFunctions.First().FunctionType == RevitEnums.FunctionType.SimpleFunction)
                 {
-                    string simpleFunction = String.Empty;
+                    string simpleFunction = string.Empty;
 
                     foreach (var arg in revitFunctions.First().Arguments)
                     {
@@ -26,7 +26,7 @@ namespace RevitFormulasValidator
                 }
             }
 
-            string formulaBody = String.Empty;
+            string formulaBody = string.Empty;
 
             foreach (var function in revitFunctions)
             {
@@ -41,7 +41,7 @@ namespace RevitFormulasValidator
             var formulaBody = FunctionTypeAnalizer.GetBlueprint(revitFunction.FunctionType);
             for (int i = 0; i < revitFunction.Arguments.Count; i++)
             {
-                string arg = (string)revitFunction.Arguments[i];
+                string arg = revitFunction.Arguments[i];
                 if (arg == "Function")
                 {
                     var childFunction = revitFunction.ChildFunctions.First();
