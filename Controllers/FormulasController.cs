@@ -24,12 +24,16 @@ namespace RevitFormulasValidator.Controllers
         [HttpGet("ValidateFormula/{formula}")]
         public Response ValidateFormula(string formula)
         {
+            Response response = new Response()
+            {
+                Success = false
+            };
+
             if (String.IsNullOrWhiteSpace(formula))
             {
-                return new Response()
-                {
-                    Error = "formula is empty"
-                };
+                response.Error = "formula is empty";
+
+                return response;
             }
             formula = formula.Replace(" ", "");
 
@@ -39,23 +43,19 @@ namespace RevitFormulasValidator.Controllers
 
                 if (revitFunctions == null)
                 {
-                    return new Response()
-                    {
-                        Error = "NULL error"
-                    };
-                }
+                    response.Error = "NULL error";
 
-                return new Response()
-                {
-                    Content = JsonConvert.SerializeObject(revitFunctions)
-                };
+                    return response;
+                }
+                response.Content = JsonConvert.SerializeObject(revitFunctions);
+
+                return response;
             }
             catch (Exception ex)
             {
-                return new Response()
-                {
-                    Error = $"Exception: {ex.Message}"
-                };
+                response.Error = $"Exception: {ex.Message}";
+
+                return response;
             }
         }
 
