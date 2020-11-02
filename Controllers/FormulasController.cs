@@ -48,7 +48,7 @@ namespace RevitFormulasValidator.Controllers
                     return response;
                 }
 
-                response.Success == true;
+                response.Success = true;
                 response.Content = JsonConvert.SerializeObject(revitFunctions);
 
                 return response;
