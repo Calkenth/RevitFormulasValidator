@@ -106,7 +106,7 @@ namespace RevitFormulasValidator.FormulasWorkers
                 if (correctNumOfCommas > numOfCommas)
                 {
                     throw new Exception(
-                        $"Missing commas in {function.FunctionTypeName} starting at index {function.StartPos}.\nFunction should have {correctNumOfCommas} commas but contains only {numOfCommas}.");
+                        $"Missing commas in {function.FunctionTypeName}(at index {function.StartPos}).\nFunction should have {correctNumOfCommas} commas but contains only {numOfCommas}.");
                 }
             }
         }
